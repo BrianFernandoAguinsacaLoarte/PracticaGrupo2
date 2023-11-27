@@ -1,0 +1,80 @@
+{
+    "controlador.TDA.listas.LinkedList": {
+        "head": {
+            "data": {
+                "@class": "modelo.DetalleCenso",
+                "id": 1,
+                "id_persona": "Hernandez",
+                "fechaCenso": "07\/11\/2022",
+                "motivo": "Problemas",
+                "fechaDivorcio": "13\/12\/2022",
+                "estadoCivilAnterior": "Casados",
+                "estadoCivilActual": "Separados"
+            },
+            "next": {
+                "data": {
+                    "@class": "modelo.DetalleCenso",
+                    "id": 2,
+                    "id_persona": "Albert",
+                    "fechaCenso": "23\/11\/2022",
+                    "motivo": "Pagos Alimenticios",
+                    "fechaDivorcio": "27\/12\/2022",
+                    "estadoCivilAnterior": "En relacion",
+                    "estadoCivilActual": "Separados"
+                },
+                "next": {
+                    "data": {
+                        "@class": "modelo.DetalleCenso",
+                        "id": 3,
+                        "id_persona": "Cueva",
+                        "fechaCenso": "14\/11\/2022",
+                        "motivo": "Infidelidad ",
+                        "fechaDivorcio": "31\/12\/2022",
+                        "estadoCivilAnterior": "Casados ",
+                        "estadoCivilActual": "Separados "
+                    },
+                    "next": {
+                        "data": {
+                            "@class": "modelo.DetalleCenso",
+                            "id": 4,
+                            "id_persona": "Albert",
+                            "fechaCenso": "14\/11\/2023",
+                            "motivo": "Problemas Intrefamiliares",
+                            "fechaDivorcio": "22\/11\/2023",
+                            "estadoCivilAnterior": "No casados",
+                            "estadoCivilActual": "Separado"
+                        },
+                        "next": {
+                            "data": {
+                                "@class": "modelo.DetalleCenso",
+                                "id": 5,
+                                "id_persona": "Cueva",
+                                "fechaCenso": "29\/11\/2023",
+                                "motivo": "Peleas Intrafamiliares",
+                                "fechaDivorcio": "30\/11\/2023",
+                                "estadoCivilAnterior": "Casados",
+                                "estadoCivilActual": "Separados"
+                            },
+                            "next": {
+                                "data": {
+                                    "@class": "modelo.DetalleCenso",
+                                    "id": 6,
+                                    "id_persona": "Jimenez",
+                                    "fechaCenso": "17\/08\/2023",
+                                    "motivo": "Separacion",
+                                    "fechaDivorcio": "20\/12\/2023",
+                                    "estadoCivilAnterior": "Casado",
+                                    "estadoCivilActual": "Separado"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "last": {
+            "@reference": "..\/head\/next\/next\/next\/next\/next"
+        },
+        "size": 6
+    }
+}

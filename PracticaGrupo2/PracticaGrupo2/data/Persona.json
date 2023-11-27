@@ -1,0 +1,98 @@
+{
+    "controlador.TDA.listas.LinkedList": {
+        "head": {
+            "data": {
+                "@class": "modelo.Persona",
+                "id": 1,
+                "nombres": "Brian",
+                "apellidos": "Fernando",
+                "direccion": "Turunuma Alto",
+                "rol": "Censador",
+                "edad": 12,
+                "genero": "Masculino",
+                "correo": "Brian@gmail.com",
+                "cedula": 1006017716,
+                "telefono": "0994390652"
+            },
+            "next": {
+                "data": {
+                    "@class": "modelo.Persona",
+                    "id": 2,
+                    "nombres": "Raul",
+                    "apellidos": "Jimenez",
+                    "direccion": "Centro",
+                    "rol": "Censador",
+                    "edad": 45,
+                    "genero": "Masculino",
+                    "correo": "Raul@gmail.com",
+                    "cedula": 1004895761,
+                    "telefono": "0941235684"
+                },
+                "next": {
+                    "data": {
+                        "@class": "modelo.Persona",
+                        "id": 3,
+                        "nombres": "Beatriz",
+                        "apellidos": "Cueva",
+                        "direccion": "Tierras Coroladas",
+                        "rol": "Cliente",
+                        "edad": 30,
+                        "genero": "Femenino",
+                        "correo": "beatriz@gmail.com",
+                        "cedula": 112489652,
+                        "telefono": "025889654"
+                    },
+                    "next": {
+                        "data": {
+                            "@class": "modelo.Persona",
+                            "id": 4,
+                            "nombres": "Diana",
+                            "apellidos": "Hernandez",
+                            "direccion": "TUrunuma",
+                            "rol": "Censador",
+                            "edad": 23,
+                            "genero": "Femenino",
+                            "correo": "raul2@gmail.com",
+                            "cedula": 1104789,
+                            "telefono": "098745263"
+                        },
+                        "next": {
+                            "data": {
+                                "@class": "modelo.Persona",
+                                "id": 5,
+                                "nombres": "Alejandro",
+                                "apellidos": "Albert",
+                                "direccion": "Turunuma",
+                                "rol": "Censador",
+                                "edad": 25,
+                                "genero": "Masculino",
+                                "correo": "Ale@gmail.com",
+                                "cedula": 104589654,
+                                "telefono": 444455874
+                            },
+                            "next": {
+                                "data": {
+                                    "@class": "modelo.Persona",
+                                    "id": 6,
+                                    "nombres": "Antonio",
+                                    "apellidos": "Hernandez",
+                                    "direccion": "La tebaida",
+                                    "rol": "Censador",
+                                    "edad": 25,
+                                    "genero": "Masculino",
+                                    "correo": "antonio@gmail.com",
+                                    "cedula": 11049851236,
+                                    "telefono": "0969145875"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "last": {
+            "@reference": "..\/head\/next\/next\/next\/next\/next"
+        },
+        "size": 6
+    }
+}
