@@ -183,4 +183,32 @@ public class LinkedList<E> {
         size = 0;
     }
     
+    //Convertir la lista a arreglo
+    public E[] toArray(){
+        Class clazz = null;
+        E[] matriz = null;
+        
+        if(this.size > 0){
+            clazz = head.getData().getClass();
+            matriz = (E[])java.lang.reflect.Array.newInstance(clazz, size);
+            Nodo<E> aux = head;
+            
+            for(int i = 0; i < size; i++){
+            matriz[i] = aux.getData();
+            aux = aux.getNext();
+            }
+        }
+        return matriz;
+    }
+    
+    //Transformando de arreglo a lista
+    public LinkedList<E> toList(E[] m){
+        clear();
+        for(int i = 0; i < m.length; i++){
+            this.add(m[i]);
+        }
+        
+        return this;
+    }
+    
 }
