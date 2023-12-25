@@ -17,10 +17,10 @@ public class ModeloTablaRegistro extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 9;
+        return 10;
     }
 
-    @Override
+     @Override
     public Object getValueAt(int fila, int column) {
 
         Persona persona = null;
@@ -32,24 +32,27 @@ public class ModeloTablaRegistro extends AbstractTableModel {
         }
         
         switch (column) {
-            case 0:
-                    return (persona != null)? persona.getNombres(): "";
+            case 0: 
+                    return (persona != null)? persona.getId(): "";
             case 1:
-                    return (persona != null)? persona.getApellidos(): "";
+                    return (persona != null)? persona.getNombres(): "";
             case 2:
+                    return (persona != null)? persona.getApellidos(): "";
+            case 3:
                     return (persona != null)? persona.getRol(): "";
-            case 3: 
-                    return (persona != null)? persona.getGenero(): "";
             case 4: 
-                    return (persona != null)? persona.getEdad(): "";
+                    return (persona != null)? persona.getGenero(): "";
             case 5: 
-                    return (persona != null)? persona.getDireccion(): "";
+                    return (persona != null)? persona.getEdad(): "";
             case 6: 
-                    return (persona != null)? persona.getCorreo(): "";
+                    return (persona != null)? persona.getDireccion(): "";
             case 7: 
-                    return (persona != null)? persona.getCedula(): "";
+                    return (persona != null)? persona.getCorreo(): "";
             case 8: 
+                    return (persona != null)? persona.getCedula(): "";
+            case 9: 
                     return (persona != null)? persona.getTelefono(): "";
+            
             default:
                 return null;
         }
@@ -59,23 +62,27 @@ public class ModeloTablaRegistro extends AbstractTableModel {
     public String getColumnName(int column){
         switch(column){
              case 0: 
-                 return "Nombres";
+                 return "Id";
              case 1: 
+                 return "Nombres";
+             case 2: 
                  return "Apellidos";
-             case 2:
+             case 3:
                  return "Rol";
-             case 3: 
-                 return "Genero";
              case 4: 
-                 return "Edad";         
+                 return "Genero";
              case 5: 
-                 return "Dirección";
+                 return "Edad";         
              case 6: 
+                 return "Dirección";
+             case 7: 
                  return "Correo";
-             case 7:
+             case 8:
                  return "Cedula";
-             case 8: 
+             case 9: 
                  return "Telefono";
+           
+              
              default: 
                  return null;
          }
