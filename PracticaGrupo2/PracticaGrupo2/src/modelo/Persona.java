@@ -129,6 +129,142 @@ public class Persona {
   
     
     
+    //Metodo Comparar
+    public boolean compareTo(Persona c, String field, Integer type) {
+        
+        switch (type) {
+            
+            case 1:     
+                if (field.equalsIgnoreCase("nombres")) {
+                    return getNombres().compareTo(c.getNombres()) > 0;
+                
+                }else if (field.equalsIgnoreCase("id")) {
+                    return getId().intValue() > c.getId().intValue();
+                
+                }else if (field.equalsIgnoreCase("apellidos")) {
+                    return getApellidos().compareTo(c.getApellidos()) > 0;
+                
+                }else if (field.equalsIgnoreCase("direccion")) {
+                    return getDireccion().compareTo(c.getDireccion()) > 0;
+                
+                }else if (field.equalsIgnoreCase("rol")) {
+                    return getRol().compareTo(c.getRol()) > 0;
+               
+                }else if (field.equalsIgnoreCase("edad")) {
+                    return getEdad().intValue() > c.getEdad().intValue();
+                
+                }else if (field.equalsIgnoreCase("genero")) {
+                    return getGenero().compareTo(c.getGenero()) > 0;
+                
+                }else if (field.equalsIgnoreCase("correo")) {
+                    return getCorreo().compareTo(c.getCorreo()) > 0;
+                
+                }else if (field.equalsIgnoreCase("cedula")) {
+                    return getCedula().compareTo(c.getCedula()) > 0;
+                
+                }else if (field.equalsIgnoreCase("telefono")) {
+                    return getTelefono().compareTo(c.getTelefono()) > 0;
+                
+                }else if (field.equalsIgnoreCase("id_Censador")) {
+                    return getId_Censador().intValue() > c.getId_Censador().intValue();
+                }
+            
+            case 0:
+                if (field.equalsIgnoreCase("nombres")) {
+                    return getNombres().compareTo(c.getNombres()) < 0;
+                
+                } else if (field.equalsIgnoreCase("id")) {
+                    return getId().intValue() < c.getId().intValue();
+                
+                }else if (field.equalsIgnoreCase("apellidos")) {
+                    return getApellidos().compareTo(c.getApellidos()) < 0;
+                
+                }else if (field.equalsIgnoreCase("direccion")) {
+                    return getDireccion().compareTo(c.getDireccion()) < 0;
+                
+                }else if (field.equalsIgnoreCase("rol")) {
+                    return getRol().compareTo(c.getRol()) < 0;
+                
+                }else if (field.equalsIgnoreCase("edad")) {
+                    return getEdad().intValue() < c.getEdad().intValue();
+                
+                }else if (field.equalsIgnoreCase("genero")) {
+                    return getGenero().compareTo(c.getGenero()) < 0;
+                
+                }else if (field.equalsIgnoreCase("correo")) {
+                    return getCorreo().compareTo(c.getCorreo()) < 0;
+                
+                }else if (field.equalsIgnoreCase("cedula")) {
+                    return getCedula().compareTo(c.getCedula()) < 0;
+                
+                }else if (field.equalsIgnoreCase("telefono")) {
+                    return getTelefono().compareTo(c.getTelefono()) < 0;
+                
+                }else if (field.equalsIgnoreCase("id_Censador")) {
+                    return getId_Censador().intValue() < c.getId_Censador().intValue();
+                }
+            default:
+                break;
+        }
+        return false;
+    }
+    
+    //Metodo Comparar para el QuickSort
+    public Integer compareQuickSort(Persona c, Integer type, String field) {
+    switch (type) {
+        case 0:
+            if (field.equalsIgnoreCase("nombres")) {
+                return this.getNombres().compareTo(c.getNombres());
+            } else if (field.equalsIgnoreCase("id")) {
+                return this.getId().compareTo(c.getId());
+            } else if (field.equalsIgnoreCase("apellidos")) {
+                return this.getApellidos().compareTo(c.getApellidos());
+            } else if (field.equalsIgnoreCase("direccion")) {
+                return this.getDireccion().compareTo(c.getDireccion());
+            } else if (field.equalsIgnoreCase("rol")) {
+                return this.getRol().compareTo(c.getRol());
+            }else if (field.equalsIgnoreCase("edad")) {
+                return this.getEdad().compareTo(c.getEdad());
+            }else if (field.equalsIgnoreCase("genero")) {
+                return this.getGenero().compareTo(c.getGenero());
+            }else if (field.equalsIgnoreCase("correo")) {
+                return this.getCorreo().compareTo(c.getCorreo());
+            }else if (field.equalsIgnoreCase("cedula")) {
+                return this.getCedula().compareTo(c.getCedula());
+            }else if (field.equalsIgnoreCase("telefono")) {
+                return this.getTelefono().compareTo(c.getTelefono());
+            }else if (field.equalsIgnoreCase("id_Censador")) {
+                return this.getId_Censador().compareTo(c.getId_Censador());
+            }
+        case 1:
+            if (field.equalsIgnoreCase("nombres")) {
+                return c.getNombres().compareTo(this.getNombres());
+            } else if (field.equalsIgnoreCase("id")) {
+                return c.getId().compareTo(this.getId());
+            } else if (field.equalsIgnoreCase("apellidos")) {
+                return c.getApellidos().compareTo(this.getApellidos());
+            } else if (field.equalsIgnoreCase("direccion")) {
+                return c.getDireccion().compareTo(this.getDireccion());
+            } else if (field.equalsIgnoreCase("rol")) {
+                return c.getRol().compareTo(this.getRol());
+            }else if (field.equalsIgnoreCase("edad")) {
+                return c.getEdad().compareTo(this.getEdad());
+            }else if (field.equalsIgnoreCase("genero")) {
+                return c.getGenero().compareTo(this.getGenero());
+            }else if (field.equalsIgnoreCase("correo")) {
+                return c.getCorreo().compareTo(this.getCorreo());
+            }else if (field.equalsIgnoreCase("cedula")) {
+                return c.getCedula().compareTo(this.getCedula());
+            }else if (field.equalsIgnoreCase("telefono")) {
+                return c.getTelefono().compareTo(this.getTelefono());
+            }else if (field.equalsIgnoreCase("id_Censador")) {
+                return c.getId_Censador().compareTo(this.getId_Censador());
+            }
+        default:
+            throw new AssertionError();
+        }
+    }
+    
     @Override
     public String toString(){
         return apellidos;
