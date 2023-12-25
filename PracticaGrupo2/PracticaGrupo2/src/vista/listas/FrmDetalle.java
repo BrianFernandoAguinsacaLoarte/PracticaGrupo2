@@ -136,11 +136,34 @@ public class FrmDetalle extends javax.swing.JDialog {
     }
     
     
-
-    
-    
-    
-    
+    private void ordenar(){
+        //Obtengo el criterio y el ordenamiento de Ascendente y Descendente
+        String criterio = cbxCriterio.getSelectedItem().toString().toLowerCase();
+        String orden = cbxQuickMerge.getSelectedItem().toString();
+        Integer ascdesc = cbxAscDesc.getSelectedIndex();//Me da un valor numerico 0 o 1
+        
+        if (orden == "QuickSort") {
+            try {
+                System.out.println("Ordenando con QuickSOrt");
+                mtd.setDetalles(dtc.ordenarQuickSort(dtc.getDetalles(), ascdesc, criterio));
+                jTableDetalle.setModel(mtd);
+                jTableDetalle.updateUI();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            try {
+                System.out.println("Ordenando con Merge Sort");
+                mtd.setDetalles(dtc.ordenarMergeSort(dtc.getDetalles(), ascdesc, criterio));
+                jTableDetalle.setModel(mtd);
+                jTableDetalle.updateUI();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
     
     
     
@@ -177,6 +200,12 @@ public class FrmDetalle extends javax.swing.JDialog {
         btnRegresar = new javax.swing.JButton();
         cbxPersonas = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        cbxAscDesc = new javax.swing.JComboBox<>();
+        cbxQuickMerge = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        cbxCriterio = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -243,7 +272,7 @@ public class FrmDetalle extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(jTableDetalle);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 730, 220));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 420, 730, 220));
 
         btnGuardar.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -288,7 +317,7 @@ public class FrmDetalle extends javax.swing.JDialog {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 590, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1430, 650, -1, -1));
 
         cbxPersonas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jPanel1.add(cbxPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, 140, -1));
@@ -296,6 +325,49 @@ public class FrmDetalle extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         jLabel8.setText("Estado Civil Actual: ");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 200, 20));
+
+        cbxAscDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASCENDENTE", "DESCENDENTE" }));
+        cbxAscDesc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxAscDescItemStateChanged(evt);
+            }
+        });
+        cbxAscDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxAscDescActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbxAscDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 340, -1, 40));
+
+        cbxQuickMerge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "QuickSort", "MergeSort" }));
+        cbxQuickMerge.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxQuickMergeItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cbxQuickMerge, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 340, 120, 40));
+
+        jLabel12.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel12.setText("Ordenamiento");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 280, 200, 40));
+
+        jLabel11.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("Criterios:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 280, 140, 40));
+
+        cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "FechaCenso", "FechaDivorcio", "Motivo", "EstadoCivilAnterior", "EstadoCivilActual", "Id_Persona" }));
+        jPanel1.add(cbxCriterio, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 340, 120, 40));
+
+        jButton1.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jButton1.setText("Ordenar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 350, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -355,6 +427,22 @@ public class FrmDetalle extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void cbxAscDescItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxAscDescItemStateChanged
+        //ordenar();
+    }//GEN-LAST:event_cbxAscDescItemStateChanged
+
+    private void cbxAscDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAscDescActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxAscDescActionPerformed
+
+    private void cbxQuickMergeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxQuickMergeItemStateChanged
+
+    }//GEN-LAST:event_cbxQuickMergeItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ordenar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -404,10 +492,16 @@ public class FrmDetalle extends javax.swing.JDialog {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbxAscDesc;
+    private javax.swing.JComboBox<String> cbxCriterio;
     private javax.swing.JComboBox<String> cbxPersonas;
+    private javax.swing.JComboBox<String> cbxQuickMerge;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JCalendar jCCenso;
     private com.toedter.calendar.JCalendar jCDivorcio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

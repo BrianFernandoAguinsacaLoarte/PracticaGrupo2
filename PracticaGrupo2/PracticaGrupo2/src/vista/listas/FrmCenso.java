@@ -55,6 +55,8 @@ public class FrmCenso extends javax.swing.JDialog {
         TxtCorreo.setText("");
         TxtCedula.setText("");
         TxtTelefono.setText("");
+        txtBusqueda.setVisible(false);
+        jLabelTexto.setVisible(false);
         
         pc.setPersona(null);
         pc.setListaPersona(new LinkedList<>());
@@ -153,6 +155,37 @@ public class FrmCenso extends javax.swing.JDialog {
     }
     
     
+    private void ordenar(){
+        //Obtengo el criterio y el ordenamiento de Ascendente y Descendente
+        String criterio = cbxCriterio.getSelectedItem().toString().toLowerCase();
+        String orden = cbxQuickMerge.getSelectedItem().toString();
+        Integer ascdesc = cbxAscDesc.getSelectedIndex();//Me da un valor numerico 0 o 1
+        
+        if (orden == "QuickSort") {
+            try {
+                System.out.println("Ordenando con QuickSOrt");
+                mtr.setListaTablaPersona(pc.ordenarQuickSort(pc.getListaPersona(), ascdesc, criterio));
+                JTableRegistro.setModel(mtr);
+                JTableRegistro.updateUI();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            try {
+                System.out.println("Ordenando con Merge Sort");
+                mtr.setListaTablaPersona(pc.ordenarMergeSort(pc.getListaPersona(), ascdesc, criterio));
+                JTableRegistro.setModel(mtr);
+                JTableRegistro.updateUI();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        
+    }
+    
     
     
     @SuppressWarnings("unchecked")
@@ -186,6 +219,14 @@ public class FrmCenso extends javax.swing.JDialog {
         cbxRol = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabelTexto = new javax.swing.JLabel();
+        txtBusqueda = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        cbxCriterio = new javax.swing.JComboBox<>();
+        cbxAscDesc = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        cbxQuickMerge = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -346,6 +387,66 @@ public class FrmCenso extends javax.swing.JDialog {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 650, -1, -1));
 
+        jLabel12.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel12.setText("Ordenamiento");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 60, 200, 40));
+
+        jLabelTexto.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jLabelTexto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelTexto.setText("Texto:");
+        jPanel1.add(jLabelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 100, 130, 40));
+
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 170, 170, 40));
+
+        jLabel11.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("Criterios:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 100, 130, 40));
+
+        cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "NOMBRES", "APELLIDOS", "EDAD", "CEDULA", "TELEFONO", "DIRECCION", " " }));
+        cbxCriterio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCriterioItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cbxCriterio, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 170, -1, 40));
+
+        cbxAscDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASCENDENTE", "DESCENDENTE" }));
+        cbxAscDesc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxAscDescItemStateChanged(evt);
+            }
+        });
+        cbxAscDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxAscDescActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbxAscDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 170, -1, 40));
+
+        jButton1.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jButton1.setText("Ordenar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 230, 160, 60));
+
+        cbxQuickMerge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "QuickSort", "MergeSort" }));
+        cbxQuickMerge.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxQuickMergeItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cbxQuickMerge, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 230, 120, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -415,6 +516,40 @@ public class FrmCenso extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusquedaActionPerformed
+
+    private void cbxCriterioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCriterioItemStateChanged
+        //ordenar();
+
+        /*
+        if(evt.getItem().toString().equalsIgnoreCase("MARCA")){
+            txtBusqueda.setVisible(false);
+            cbxMarcaB.setVisible(true);
+
+        }else{
+            txtBusqueda.setVisible(true);
+            cbxMarcaB.setVisible(false);
+        }
+        */
+    }//GEN-LAST:event_cbxCriterioItemStateChanged
+
+    private void cbxAscDescItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxAscDescItemStateChanged
+        //ordenar();
+    }//GEN-LAST:event_cbxAscDescItemStateChanged
+
+    private void cbxAscDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAscDescActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxAscDescActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ordenar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbxQuickMergeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxQuickMergeItemStateChanged
+    }//GEN-LAST:event_cbxQuickMergeItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -471,10 +606,16 @@ public class FrmCenso extends javax.swing.JDialog {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbxAscDesc;
+    private javax.swing.JComboBox<String> cbxCriterio;
     private javax.swing.JComboBox<String> cbxGenero;
+    private javax.swing.JComboBox<String> cbxQuickMerge;
     private javax.swing.JComboBox<String> cbxRol;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -483,7 +624,9 @@ public class FrmCenso extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTexto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }
