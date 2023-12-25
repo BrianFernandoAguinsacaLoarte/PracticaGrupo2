@@ -18,7 +18,7 @@ public class ModeloTablaDetalle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     @Override
@@ -31,18 +31,21 @@ public class ModeloTablaDetalle extends AbstractTableModel {
         }
         
         switch (columna) {
-            case 0:
-                    return (detalleCenso != null)? detalleCenso.getFechaCenso(): "";
+            case 0: 
+                    return (detalleCenso != null)? detalleCenso.getId(): "";
             case 1:
+                    return (detalleCenso != null)? detalleCenso.getFechaCenso(): "";
+            case 2:
                     return (detalleCenso != null)? detalleCenso.getId_persona(): "";
-            case 2: 
-                    return (detalleCenso != null)? detalleCenso.getMotivo(): "";
             case 3: 
-                    return (detalleCenso != null)? detalleCenso.getFechaDivorcio(): "";
+                    return (detalleCenso != null)? detalleCenso.getMotivo(): "";
             case 4: 
-                    return (detalleCenso != null)? detalleCenso.getEstadoCivilAnterior(): "";
+                    return (detalleCenso != null)? detalleCenso.getFechaDivorcio(): "";
             case 5: 
+                    return (detalleCenso != null)? detalleCenso.getEstadoCivilAnterior(): "";
+            case 6: 
                     return (detalleCenso != null)? detalleCenso.getEstadoCivilActual(): "";
+            
                 
             default:
                 return null;
@@ -53,16 +56,18 @@ public class ModeloTablaDetalle extends AbstractTableModel {
     public String getColumnName(int columna) {
         switch (columna) {
             case 0:
-                    return "Fecha Censo";
+                    return "ID";
             case 1:
+                    return "Fecha Censo";
+            case 2:
                     return "Cliente";
-            case 2: 
-                    return "Motivo";
             case 3: 
-                    return "Fecha Divorcio/Separamiento";
+                    return "Motivo";
             case 4: 
-                    return "Estado Civil Anterior";
+                    return "Fecha Divorcio/Separamiento";
             case 5: 
+                    return "Estado Civil Anterior";
+            case 6: 
                     return "Estado Civil Actual";
             default:
                 return null;
