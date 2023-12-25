@@ -184,10 +184,10 @@ public class PersonaController extends DataAccessObject<Persona>{
             int i = izq;
             int j = der;
 
-            // Obtén el pivote
+            // Obtengo el pivote
             Persona pivote = m[(izq + der) / 2];
 
-            // Realiza el particionamiento
+            // Realizo el particionamiento
             while (i <= j) {
                 while (m[i].compareQuickSort(pivote, type, field) < 0) {
                     i++;
@@ -209,8 +209,8 @@ public class PersonaController extends DataAccessObject<Persona>{
                 }
             }
             lista = lista.toList(m);
-            quickSort(lista, izq, j, type, field, contador); // Ordena la parte izquierda
-            quickSort(lista, i, der, type, field, contador); // Ordena la parte derecha
+            quickSort(lista, izq, j, type, field, contador); // Ordeno la parte izquierda
+            quickSort(lista, i, der, type, field, contador); // Ordeno la parte derecha
         }
         return lista;
     }
@@ -238,7 +238,7 @@ public class PersonaController extends DataAccessObject<Persona>{
        try {
            //ORDENAR SELECCION
             System.out.println("Probando Ordenamiento SELECCION");
-            System.out.println(pc.ordenarSeleccion(0, "apellidos", pc.getListaPersona()).imprimir());
+            System.out.println(pc.ordenarSeleccion(1, "apellidos", pc.getListaPersona()).imprimir());
 
             //LISTA ANTES DE ORDENAR
             System.out.println("Lista antes de ordenar:");
@@ -246,11 +246,11 @@ public class PersonaController extends DataAccessObject<Persona>{
             
             //ORDENAR MERGESORT
             System.out.println("Ordenar Merge Sort");
-            System.out.println(pc.ordenarMergeSort(pc.getListaPersona(), 0, "apellidos").imprimir());
+            System.out.println(pc.ordenarMergeSort(pc.getListaPersona(), 1, "apellidos").imprimir());
             
             //ORDENARQUICKSORT
             System.out.println("Ordenamieto por QuickSort");
-            System.out.println(pc.ordenarQuickSort(pc.getListaPersona(), 0, "apellidos").imprimir());
+            System.out.println(pc.ordenarQuickSort(pc.getListaPersona(), 1, "apellidos").imprimir());
             
            
             
