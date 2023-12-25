@@ -5,14 +5,14 @@
                 "@class": "modelo.Persona",
                 "id": 1,
                 "nombres": "Brian",
-                "apellidos": "Fernando",
+                "apellidos": "Aguinsaca",
                 "direccion": "Turunuma Alto",
-                "rol": "Censador",
-                "edad": 12,
+                "rol": "Cliente",
+                "edad": 19,
                 "genero": "Masculino",
-                "correo": "Brian@gmail.com",
-                "cedula": 1006017716,
-                "telefono": "0994390652"
+                "correo": "brian.aguinsaca@gmail.com",
+                "cedula": 1006017871,
+                "telefono": "0971336652"
             },
             "next": {
                 "data": {
@@ -20,11 +20,11 @@
                     "id": 2,
                     "nombres": "Raul",
                     "apellidos": "Jimenez",
-                    "direccion": "Centro",
+                    "direccion": "La Salle",
                     "rol": "Censador",
-                    "edad": 45,
+                    "edad": 29,
                     "genero": "Masculino",
-                    "correo": "Raul@gmail.com",
+                    "correo": "raul.jimenez@gmail.com",
                     "cedula": 1004895761,
                     "telefono": "0941235684"
                 },
@@ -36,39 +36,39 @@
                         "apellidos": "Cueva",
                         "direccion": "Tierras Coroladas",
                         "rol": "Cliente",
-                        "edad": 30,
+                        "edad": 22,
                         "genero": "Femenino",
-                        "correo": "beatriz@gmail.com",
-                        "cedula": 112489652,
-                        "telefono": "025889654"
+                        "correo": "beatriz.cueva@gmail.com",
+                        "cedula": 1608765432,
+                        "telefono": "0958896545"
                     },
                     "next": {
                         "data": {
                             "@class": "modelo.Persona",
                             "id": 4,
                             "nombres": "Diana",
-                            "apellidos": "Hernandez",
-                            "direccion": "TUrunuma",
+                            "apellidos": "Ramirez",
+                            "direccion": "Las Palmas Alto",
                             "rol": "Censador",
                             "edad": 23,
                             "genero": "Femenino",
-                            "correo": "raul2@gmail.com",
-                            "cedula": 1104789,
-                            "telefono": "098745263"
+                            "correo": "diana.ramirez@gmail.com",
+                            "cedula": 1102612233,
+                            "telefono": "0987452637"
                         },
                         "next": {
                             "data": {
                                 "@class": "modelo.Persona",
                                 "id": 5,
                                 "nombres": "Alejandro",
-                                "apellidos": "Albert",
-                                "direccion": "Turunuma",
-                                "rol": "Censador",
-                                "edad": 25,
+                                "apellidos": "Gonzalez",
+                                "direccion": "Zamora Huayco Alto",
+                                "rol": "Cliente",
+                                "edad": 34,
                                 "genero": "Masculino",
-                                "correo": "Ale@gmail.com",
-                                "cedula": 104589654,
-                                "telefono": 444455874
+                                "correo": "alejandro.gonzales@gmail.com",
+                                "cedula": 1045896547,
+                                "telefono": "0921263757"
                             },
                             "next": {
                                 "data": {
@@ -76,13 +76,223 @@
                                     "id": 6,
                                     "nombres": "Antonio",
                                     "apellidos": "Hernandez",
-                                    "direccion": "La tebaida",
+                                    "direccion": "La Tebaida",
                                     "rol": "Censador",
-                                    "edad": 25,
+                                    "edad": 32,
                                     "genero": "Masculino",
-                                    "correo": "antonio@gmail.com",
-                                    "cedula": 11049851236,
+                                    "correo": "antonio.hernandez@gmail.com",
+                                    "cedula": 1104985123,
                                     "telefono": "0969145875"
+                                },
+                                "next": {
+                                    "data": {
+                                        "@class": "modelo.Persona",
+                                        "id": 7,
+                                        "nombres": "Anthony",
+                                        "apellidos": "Perez",
+                                        "direccion": "Zamora Huayco",
+                                        "rol": "Cliente",
+                                        "edad": 42,
+                                        "genero": "Masculino",
+                                        "correo": "juan.perez@gmail.com",
+                                        "cedula": 1704567890,
+                                        "telefono": "0994258614"
+                                    },
+                                    "next": {
+                                        "data": {
+                                            "@class": "modelo.Persona",
+                                            "id": 8,
+                                            "nombres": "Maria",
+                                            "apellidos": "Rodriguez",
+                                            "direccion": "El Tejar",
+                                            "rol": "Censador",
+                                            "edad": 36,
+                                            "genero": "Femenino",
+                                            "correo": "maria.rodriguez@gmail.com",
+                                            "cedula": 1201234567,
+                                            "telefono": "0994245614"
+                                        },
+                                        "next": {
+                                            "data": {
+                                                "@class": "modelo.Persona",
+                                                "id": 9,
+                                                "nombres": "Luis ",
+                                                "apellidos": "Martinez",
+                                                "direccion": "El Calvario",
+                                                "rol": "Cliente",
+                                                "edad": 40,
+                                                "genero": "Masculino",
+                                                "correo": "luis.martinez@gmail.com",
+                                                "cedula": 1109876549,
+                                                "telefono": "0903258632"
+                                            },
+                                            "next": {
+                                                "data": {
+                                                    "@class": "modelo.Persona",
+                                                    "id": 10,
+                                                    "nombres": "Ana ",
+                                                    "apellidos": "Gomez",
+                                                    "direccion": "San Agustín",
+                                                    "rol": "Censador",
+                                                    "edad": 18,
+                                                    "genero": "Femenino",
+                                                    "correo": "ana.gomez@example.com",
+                                                    "cedula": "0508765432",
+                                                    "telefono": "0975258642"
+                                                },
+                                                "next": {
+                                                    "data": {
+                                                        "@class": "modelo.Persona",
+                                                        "id": 11,
+                                                        "nombres": "Jorge ",
+                                                        "apellidos": "Sanchez",
+                                                        "direccion": "La Argelia",
+                                                        "rol": "Cliente",
+                                                        "edad": 50,
+                                                        "genero": "Masculino",
+                                                        "correo": "jorge.sanchez@gmail.com",
+                                                        "cedula": "0601122234",
+                                                        "telefono": "0958258645"
+                                                    },
+                                                    "next": {
+                                                        "data": {
+                                                            "@class": "modelo.Persona",
+                                                            "id": 12,
+                                                            "nombres": "Laura ",
+                                                            "apellidos": "Herrera",
+                                                            "direccion": "Capulí",
+                                                            "rol": "Censador",
+                                                            "edad": 38,
+                                                            "genero": "Femenino",
+                                                            "correo": "laura.herrera@gmail.com",
+                                                            "cedula": "0309876541",
+                                                            "telefono": "0974258669"
+                                                        },
+                                                        "next": {
+                                                            "data": {
+                                                                "@class": "modelo.Persona",
+                                                                "id": 13,
+                                                                "nombres": "Carlos ",
+                                                                "apellidos": "Castro",
+                                                                "direccion": "Pradera",
+                                                                "rol": "Cliente",
+                                                                "edad": 41,
+                                                                "genero": "Masculino",
+                                                                "correo": "carlos.castro@gmail.com",
+                                                                "cedula": 1504567890,
+                                                                "telefono": "0994258678"
+                                                            },
+                                                            "next": {
+                                                                "data": {
+                                                                    "@class": "modelo.Persona",
+                                                                    "id": 14,
+                                                                    "nombres": "Sofia ",
+                                                                    "apellidos": "Diaz",
+                                                                    "direccion": "Los Molinos",
+                                                                    "rol": "Censador",
+                                                                    "edad": 20,
+                                                                    "genero": "Femenino",
+                                                                    "correo": "sofia.diaz@gmail.com",
+                                                                    "cedula": "0403456789",
+                                                                    "telefono": "0994258687"
+                                                                },
+                                                                "next": {
+                                                                    "data": {
+                                                                        "@class": "modelo.Persona",
+                                                                        "id": 15,
+                                                                        "nombres": "Roberto ",
+                                                                        "apellidos": "Suarez",
+                                                                        "direccion": "Los Geranios",
+                                                                        "rol": "Cliente",
+                                                                        "edad": 62,
+                                                                        "genero": "Masculino",
+                                                                        "correo": "roberto.suarez@gmail.com",
+                                                                        "cedula": 1302345678,
+                                                                        "telefono": "0994258696"
+                                                                    },
+                                                                    "next": {
+                                                                        "data": {
+                                                                            "@class": "modelo.Persona",
+                                                                            "id": 16,
+                                                                            "nombres": "Gabriela ",
+                                                                            "apellidos": "Chavez",
+                                                                            "direccion": "Santa Ana",
+                                                                            "rol": "Censador",
+                                                                            "edad": 65,
+                                                                            "genero": "Femenino",
+                                                                            "correo": "gabriela.chavez@gmail.com",
+                                                                            "cedula": 1106782233,
+                                                                            "telefono": "0994258702"
+                                                                        },
+                                                                        "next": {
+                                                                            "data": {
+                                                                                "@class": "modelo.Persona",
+                                                                                "id": 17,
+                                                                                "nombres": "Valeria",
+                                                                                "apellidos": "Vargas",
+                                                                                "direccion": "El Panecillo",
+                                                                                "rol": "Cliente",
+                                                                                "edad": 46,
+                                                                                "genero": "Femenino",
+                                                                                "correo": "valeria.vargas@gmail.com",
+                                                                                "cedula": 1608765432,
+                                                                                "telefono": "0920258720"
+                                                                            },
+                                                                            "next": {
+                                                                                "data": {
+                                                                                    "@class": "modelo.Persona",
+                                                                                    "id": 18,
+                                                                                    "nombres": "Miguel ",
+                                                                                    "apellidos": "Molina",
+                                                                                    "direccion": "Parque Infantil",
+                                                                                    "rol": "Censador",
+                                                                                    "edad": 27,
+                                                                                    "genero": "Masculino",
+                                                                                    "correo": "miguel.molina@gmail.com",
+                                                                                    "cedula": 1001234567,
+                                                                                    "telefono": "0974258739"
+                                                                                },
+                                                                                "next": {
+                                                                                    "data": {
+                                                                                        "@class": "modelo.Persona",
+                                                                                        "id": 19,
+                                                                                        "nombres": "Fernando ",
+                                                                                        "apellidos": "Ortega",
+                                                                                        "direccion": "Las Palmeras",
+                                                                                        "rol": "Cliente",
+                                                                                        "edad": 70,
+                                                                                        "genero": "Masculino",
+                                                                                        "correo": "fernando.ortega@gmail.com",
+                                                                                        "cedula": 1404567890,
+                                                                                        "telefono": "0994258757"
+                                                                                    },
+                                                                                    "next": {
+                                                                                        "data": {
+                                                                                            "@class": "modelo.Persona",
+                                                                                            "id": 20,
+                                                                                            "nombres": "Julia ",
+                                                                                            "apellidos": "Mendez",
+                                                                                            "direccion": "San Isidro",
+                                                                                            "rol": "Censador",
+                                                                                            "edad": 41,
+                                                                                            "genero": "Femenino",
+                                                                                            "correo": "julia.mendez@gmail.com",
+                                                                                            "cedula": 1109876543,
+                                                                                            "telefono": "0994258784"
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -91,8 +301,8 @@
             }
         },
         "last": {
-            "@reference": "..\/head\/next\/next\/next\/next\/next"
+            "@reference": "..\/head\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next"
         },
-        "size": 6
+        "size": 20
     }
 }
