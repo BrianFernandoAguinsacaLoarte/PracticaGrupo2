@@ -6,6 +6,9 @@ import controlador.TDA.listas.LinkedList;
 import controlador.dao.DataAccessObject;
 import controlador.util.Utilidades;
 import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.EmptyStackException;
 import modelo.DetalleCenso;
 import modelo.Persona;
@@ -207,7 +210,9 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
         }
         return lista;
     }
-   
+    
+    
+    
     public static void mostrarArreglo(int arreglo[]){
        
        for(int i=0; i < arreglo.length; i++){
@@ -242,7 +247,7 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
             System.out.println("Ordenamieto por QuickSort");
             System.out.println(dtc.ordenarQuickSort(dtc.getDetalles(), 0, "fechaDivorcio").imprimir());
             
-           
+            
         } catch (Exception e) {
         }
     }

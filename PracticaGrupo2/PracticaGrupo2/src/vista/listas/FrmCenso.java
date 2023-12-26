@@ -182,10 +182,7 @@ public class FrmCenso extends javax.swing.JDialog {
                         "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-        
     }
-    
     
     
     @SuppressWarnings("unchecked")

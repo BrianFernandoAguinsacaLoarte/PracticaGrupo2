@@ -236,9 +236,10 @@ public class DetalleCenso {
         }
     }
     
+    
      @Override
     public String toString(){
-        return fechaDivorcio;
+        return motivo;
     }
     
     
