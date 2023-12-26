@@ -5,6 +5,7 @@ import controlador.TDA.listas.LinkedList;
 import controlador.personas.DetalleController;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import modelo.DetalleCenso;
 import vista.listas.tablas.ModeloTablaDetalle;
 import vista.listas.tablas.Util.UtilVista;
 
@@ -165,6 +166,66 @@ public class FrmDetalle extends javax.swing.JDialog {
         }
     }
     
+    private void buscar() {
+        String text = txtBusqueda.getText().toString().toLowerCase();
+        String field = cbxCriterio.getSelectedItem().toString().toLowerCase();
+        String busqueda = cbxBusqueda.getSelectedItem().toString();
+
+        try {
+            LinkedList<DetalleCenso> listaResultado;
+            switch (busqueda) {
+                case "Busqueda Binaria":
+                    if (field.equalsIgnoreCase("motivo") || field.equalsIgnoreCase("estadocivilanterior")
+                            || field.equalsIgnoreCase("estadocivilactual") || field.equalsIgnoreCase("id_persona")) {
+                        listaResultado = dtc.busquedaBinaria(dtc.getDetalles(), text, field);
+                    } else if (field.equalsIgnoreCase("id")) {
+                        try {
+                            int textoEntero = Integer.parseInt(text);
+                            listaResultado = dtc.busquedaBinariaEntero(dtc.getDetalles(), textoEntero, field);
+                        } catch (NumberFormatException ex) {
+                            throw new IllegalArgumentException("Debe ser entero");
+                        }
+                    } else if(field.equalsIgnoreCase("fechacenso")|| field.equalsIgnoreCase("fechadivorcio")){
+                            
+                            listaResultado = dtc.busquedaBinariaFecha(dtc.getDetalles(), text, field);
+                            
+                    }else {
+                        throw new IllegalArgumentException("No existe el campo " + field);
+                    }
+                    break;
+
+                case "Busqueda Lineal":
+                    if (field.equalsIgnoreCase("motivo") || field.equalsIgnoreCase("estadocivilanterior")
+                            || field.equalsIgnoreCase("estadocivilactual") || field.equalsIgnoreCase("id_persona")) {
+                        listaResultado = dtc.busquedaLinealBinaria(dtc.getDetalles(), text, field);
+                    } else if (field.equalsIgnoreCase("id")) {
+                        try {
+                            int textoEntero = Integer.parseInt(text);
+                            listaResultado = dtc.busquedaLinealBinariaEntero(dtc.getDetalles(), textoEntero, field);
+                        } catch (NumberFormatException ex) {
+                            throw new IllegalArgumentException("Debe ser entero");
+                        }
+                    } else if(field.equalsIgnoreCase("fechacenso")|| field.equalsIgnoreCase("fechadivorcio")){
+                            
+                            listaResultado = dtc.busquedaLinealFecha(dtc.getDetalles(), text, field);
+                            
+                    } else {
+                        throw new IllegalArgumentException("No existe el campo " + field);
+                    }
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Tipo de búsqueda no reconocido: " + busqueda);
+            }
+
+            mtd.setDetalles(listaResultado);
+            jTableDetalle.setModel(mtd);
+            jTableDetalle.updateUI();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
     
     /**
@@ -204,8 +265,13 @@ public class FrmDetalle extends javax.swing.JDialog {
         cbxQuickMerge = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        cbxCriterio = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        cbxCriterio = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        txtBusqueda = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        cbxBusqueda = new javax.swing.JComboBox<>();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -272,7 +338,7 @@ public class FrmDetalle extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(jTableDetalle);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 420, 730, 220));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 510, 730, 220));
 
         btnGuardar.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -317,7 +383,7 @@ public class FrmDetalle extends javax.swing.JDialog {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1430, 650, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 740, -1, -1));
 
         cbxPersonas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jPanel1.add(cbxPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, 140, -1));
@@ -337,7 +403,7 @@ public class FrmDetalle extends javax.swing.JDialog {
                 cbxAscDescActionPerformed(evt);
             }
         });
-        jPanel1.add(cbxAscDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 340, -1, 40));
+        jPanel1.add(cbxAscDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 330, -1, 40));
 
         cbxQuickMerge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "QuickSort", "MergeSort" }));
         cbxQuickMerge.addItemListener(new java.awt.event.ItemListener() {
@@ -345,20 +411,17 @@ public class FrmDetalle extends javax.swing.JDialog {
                 cbxQuickMergeItemStateChanged(evt);
             }
         });
-        jPanel1.add(cbxQuickMerge, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 340, 120, 40));
+        jPanel1.add(cbxQuickMerge, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 390, 120, 40));
 
         jLabel12.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel12.setText("Ordenamiento");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 280, 200, 40));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 270, 200, 40));
 
         jLabel11.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel11.setText("Criterios:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 280, 140, 40));
-
-        cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "FechaCenso", "FechaDivorcio", "Motivo", "EstadoCivilAnterior", "EstadoCivilActual", "Id_Persona" }));
-        jPanel1.add(cbxCriterio, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 340, 120, 40));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 140, 40));
 
         jButton1.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         jButton1.setText("Ordenar");
@@ -367,7 +430,39 @@ public class FrmDetalle extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 350, 110, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 460, 110, -1));
+
+        cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "FechaCenso", "FechaDivorcio", "Motivo", "EstadoCivilAnterior", "EstadoCivilActual", "Id_Persona" }));
+        jPanel1.add(cbxCriterio, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 310, 120, 40));
+
+        jLabel13.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("Busqueda");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 270, 200, 40));
+
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 310, 170, 40));
+
+        jLabel15.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("Métodos de Busqueda:");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 360, 210, 40));
+
+        cbxBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Busqueda Binaria", "Busqueda Lineal", " " }));
+        jPanel1.add(cbxBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 400, 210, 40));
+
+        btnBuscar.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 460, 110, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -443,6 +538,14 @@ public class FrmDetalle extends javax.swing.JDialog {
         ordenar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusquedaActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscar();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -488,11 +591,13 @@ public class FrmDetalle extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbxAscDesc;
+    private javax.swing.JComboBox<String> cbxBusqueda;
     private javax.swing.JComboBox<String> cbxCriterio;
     private javax.swing.JComboBox<String> cbxPersonas;
     private javax.swing.JComboBox<String> cbxQuickMerge;
@@ -502,6 +607,8 @@ public class FrmDetalle extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -512,6 +619,7 @@ public class FrmDetalle extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableDetalle;
+    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtECActual;
     private javax.swing.JTextField txtECAnterior;
     private javax.swing.JTextField txtFechaCenso;
