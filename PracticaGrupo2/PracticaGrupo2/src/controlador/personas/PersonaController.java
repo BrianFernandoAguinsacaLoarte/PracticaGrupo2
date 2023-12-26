@@ -214,7 +214,167 @@ public class PersonaController extends DataAccessObject<Persona>{
         }
         return lista;
     }
-   
+    
+    //BUSQUEDAS 
+    public boolean busquedaBinariaV(int valor, int[] arreglo){
+        boolean encontrado  = false;
+        int inicio = 0;
+        int fin = arreglo.length -1;
+        
+        while(inicio <= fin && !encontrado){
+            int medio = (inicio + fin)/2;
+            if(arreglo[medio] == valor){
+                encontrado = true;
+            }else{
+                if(arreglo[medio] > valor){
+                    fin = medio - 1;
+                }else{
+                    inicio = medio + 1;
+                }
+            }
+                
+        }
+        return encontrado;
+    }
+    
+    //Busqueda Binaria
+    public LinkedList<Persona> busquedaBinaria(LinkedList<Persona> lista, String text, String field) throws VacioExcepcion {
+        LinkedList<Persona> personas = new LinkedList<>(); //Nueva Lista
+        Persona[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); //Ordenando con QuickSort ya que es el método mas rapido a diferencia del MergeSort
+
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            Persona b = arregloOrdenado[medio];
+            String valor = Persona.criterio(b, field).toLowerCase();
+
+            if (valor.contains(text.toLowerCase())) {
+                personas.add(b);
+            }
+            if (valor.compareTo(text.toLowerCase()) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+
+        }
+
+        return personas;
+    }
+    
+    public LinkedList<Persona> busquedaBinariaEntero(LinkedList<Persona> lista, Integer text, String field) throws VacioExcepcion {
+        LinkedList<Persona> personas = new LinkedList<>(); // Nueva Lista
+        Persona[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort ya que es el método más rápido a diferencia del MergeSort
+
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            Persona b = arregloOrdenado[medio];
+            Integer valor = Persona.criterioEntero(b, field);
+
+            if (valor.equals(text)) {
+                personas.add(b);
+            }
+            if (valor.compareTo(text) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+        }
+
+        return personas;
+    }
+    
+    //Busquedas Lineales
+    public LinkedList<Persona> busquedaLinealBinaria(LinkedList<Persona> lista, String text, String field) throws VacioExcepcion {
+        LinkedList<Persona> personas = new LinkedList<>(); // Nueva Lista
+        Persona[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort
+
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            Persona b = arregloOrdenado[medio];
+            String valor = Persona.criterio(b, field).toLowerCase();
+
+            if (valor.contains(text.toLowerCase())) {
+                personas.add(b);
+
+                // Búsqueda lineal hacia atrás
+                int izquierda = medio - 1;
+                while (izquierda >= 0 && Persona.criterio(arregloOrdenado[izquierda], field).toLowerCase().contains(text.toLowerCase())) {
+                    personas.add(arregloOrdenado[izquierda]);
+                    izquierda--;
+                }
+
+                // Búsqueda lineal hacia adelante
+                int derecha = medio + 1;
+                while (derecha < arregloOrdenado.length && Persona.criterio(arregloOrdenado[derecha], field).toLowerCase().contains(text.toLowerCase())) {
+                    personas.add(arregloOrdenado[derecha]);
+                    derecha++;
+                }
+
+                return personas;  // Se ha encontrado una coincidencia, devolver la lista actualizada
+            }
+
+            if (valor.compareTo(text.toLowerCase()) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+        }
+
+        return personas;  // Si no se encuentra ninguna coincidencia
+    }
+    
+    public LinkedList<Persona> busquedaLinealBinariaEntero(LinkedList<Persona> lista, Integer text, String field) throws VacioExcepcion {
+        LinkedList<Persona> personas = new LinkedList<>(); // Nueva Lista
+        Persona[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort
+
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            Persona b = arregloOrdenado[medio];
+            Integer valor = Persona.criterioEntero(b, field);
+
+            if (valor.equals(text)) {
+                personas.add(b);
+
+                // Búsqueda lineal hacia atrás
+                int izquierda = medio - 1;
+                while (izquierda >= 0 && Persona.criterioEntero(arregloOrdenado[izquierda], field).equals(text)) {
+                    personas.add(arregloOrdenado[izquierda]);
+                    izquierda--;
+                }
+
+                // Búsqueda lineal hacia adelante
+                int derecha = medio + 1;
+                while (derecha < arregloOrdenado.length && Persona.criterioEntero(arregloOrdenado[derecha], field).equals(text)) {
+                    personas.add(arregloOrdenado[derecha]);
+                    derecha++;
+                }
+
+                return personas;  // Se ha encontrado una coincidencia, devolver la lista actualizada
+            }
+
+            if (valor.compareTo(text) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+        }
+
+        return personas;  // Si no se encuentra ninguna coincidencia
+    }
+    
+    
     public static void mostrarArreglo(int arreglo[]){
        
        for(int i=0; i < arreglo.length; i++){
@@ -252,7 +412,16 @@ public class PersonaController extends DataAccessObject<Persona>{
             System.out.println("Ordenamieto por QuickSort");
             System.out.println(pc.ordenarQuickSort(pc.getListaPersona(), 1, "apellidos").imprimir());
             
-           
+            //Busqueda Binaria
+            System.out.println("Busqueda Binaria");
+            System.out.println(pc.busquedaBinaria( pc.getListaPersona(),"c", "apellidos").imprimir());
+            System.out.println("Busqueda Binaria Entera");
+            System.out.println(pc.busquedaBinariaEntero(pc.getListaPersona(),70, "edad").imprimir());
+            System.out.println("Busqueda Lineal Binaria");
+            System.out.println(pc.busquedaLinealBinaria(pc.getListaPersona(),"c", "apellidos").imprimir());
+            System.out.println("Busqueda Lineal Binaria Entera"); 
+            System.out.println(pc.busquedaLinealBinariaEntero(pc.getListaPersona(),70, "edad").imprimir());
+            
             
            /*
              Object resp = Utilidades.getData(pc.getPersona(), "nombres");
