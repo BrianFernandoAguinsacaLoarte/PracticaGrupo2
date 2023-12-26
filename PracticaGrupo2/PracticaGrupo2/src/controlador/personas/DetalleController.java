@@ -211,7 +211,200 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
         return lista;
     }
     
+    //Busqueda Binaria
+    public LinkedList<DetalleCenso> busquedaBinaria(LinkedList<DetalleCenso> lista, String text, String field) throws VacioExcepcion {
+        LinkedList<DetalleCenso> detalles = new LinkedList<>(); //Nueva Lista
+        DetalleCenso[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); //Ordenando con QuickSort ya que es el método mas rapido a diferencia del MergeSort
+
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            DetalleCenso b = arregloOrdenado[medio];
+            String valor = DetalleCenso.criterio(b, field).toLowerCase();
+
+            if (valor.contains(text.toLowerCase())) {
+                detalles.add(b);
+            }
+            if (valor.compareTo(text.toLowerCase()) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+
+        }
+
+        return detalles;
+    }
+    //Busqueda Binaria para tipo Int
+    public LinkedList<DetalleCenso> busquedaBinariaEntero(LinkedList<DetalleCenso> lista, Integer text, String field) throws VacioExcepcion {
+        LinkedList<DetalleCenso> detalles = new LinkedList<>(); // Nueva Lista
+        DetalleCenso[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort ya que es el método más rápido a diferencia del MergeSort
+
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            DetalleCenso b = arregloOrdenado[medio];
+            Integer valor = DetalleCenso.criterioEntero(b, field);
+
+            if (valor.equals(text)) {
+                detalles.add(b);
+            }
+            if (valor.compareTo(text) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+        }
+
+        return detalles;
+    }
+    //Busqueda binaria para Fechas
+    public LinkedList<DetalleCenso> busquedaBinariaFecha(LinkedList<DetalleCenso> lista, String text, String field) throws VacioExcepcion, ParseException {
+        LinkedList<DetalleCenso> detalles = new LinkedList<>(); // Nueva Lista
+        DetalleCenso[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            DetalleCenso b = arregloOrdenado[medio];
+            Date valor = DetalleCenso.criterioFecha(b, field);
+
+            if (text.equals(sdf.format(valor))) {
+                detalles.add(b);
+            }
+            if (valor.compareTo(sdf.parse(text)) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+        }
+
+        return detalles;
+    }
     
+    //Busquedas Lineales
+    public LinkedList<DetalleCenso> busquedaLinealBinaria(LinkedList<DetalleCenso> lista, String text, String field) throws VacioExcepcion {
+        LinkedList<DetalleCenso> detalles = new LinkedList<>(); // Nueva Lista
+        DetalleCenso[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort
+
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            DetalleCenso b = arregloOrdenado[medio];
+            String valor = DetalleCenso.criterio(b, field).toLowerCase();
+
+            if (valor.contains(text.toLowerCase())) {
+                detalles.add(b);
+
+                // Búsqueda lineal hacia atrás
+                int izquierda = medio - 1;
+                while (izquierda >= 0 && DetalleCenso.criterio(arregloOrdenado[izquierda], field).toLowerCase().contains(text.toLowerCase())) {
+                    detalles.add(arregloOrdenado[izquierda]);
+                    izquierda--;
+                }
+
+                // Búsqueda lineal hacia adelante
+                int derecha = medio + 1;
+                while (derecha < arregloOrdenado.length && DetalleCenso.criterio(arregloOrdenado[derecha], field).toLowerCase().contains(text.toLowerCase())) {
+                    detalles.add(arregloOrdenado[derecha]);
+                    derecha++;
+                }
+
+                return detalles;  // Se ha encontrado una coincidencia, devolver la lista actualizada
+            }
+
+            if (valor.compareTo(text.toLowerCase()) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+        }
+
+        return detalles;  // Si no se encuentra ninguna coincidencia
+    }
+    
+    public LinkedList<DetalleCenso> busquedaLinealBinariaEntero(LinkedList<DetalleCenso> lista, Integer text, String field) throws VacioExcepcion {
+        LinkedList<DetalleCenso> detalles = new LinkedList<>(); // Nueva Lista
+        DetalleCenso[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort
+
+        int inicio = 0;
+        int fin = arregloOrdenado.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            DetalleCenso b = arregloOrdenado[medio];
+            Integer valor = DetalleCenso.criterioEntero(b, field);
+
+            if (valor.equals(text)) {
+                detalles.add(b);
+
+                // Búsqueda lineal hacia atrás
+                int izquierda = medio - 1;
+                while (izquierda >= 0 && DetalleCenso.criterioEntero(arregloOrdenado[izquierda], field).equals(text)) {
+                    detalles.add(arregloOrdenado[izquierda]);
+                    izquierda--;
+                }
+
+                // Búsqueda lineal hacia adelante
+                int derecha = medio + 1;
+                while (derecha < arregloOrdenado.length && DetalleCenso.criterioEntero(arregloOrdenado[derecha], field).equals(text)) {
+                    detalles.add(arregloOrdenado[derecha]);
+                    derecha++;
+                }
+
+                return detalles;  // Se ha encontrado una coincidencia, devolver la lista actualizada
+            }
+
+            if (valor.compareTo(text) < 0) {
+                inicio = medio + 1; // El elemento está en la mitad derecha
+            } else {
+                fin = medio - 1; // El elemento está en la mitad izquierda
+            }
+        }
+
+        return detalles;  // Si no se encuentra ninguna coincidencia
+    }
+    
+    public LinkedList<DetalleCenso> busquedaLinealFecha(LinkedList<DetalleCenso> lista, String text, String field) throws VacioExcepcion, ParseException {
+        LinkedList<DetalleCenso> detalles = new LinkedList<>(); // Nueva Lista
+        DetalleCenso[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (DetalleCenso b : arregloOrdenado) {
+            Date valor = DetalleCenso.criterioFecha(b, field);
+
+            if (text.equals(sdf.format(valor))) {
+                detalles.add(b);
+
+                // Búsqueda lineal hacia atrás
+                int izquierda = b.getId(); // Utiliza un campo único para identificar el inicio de la búsqueda lineal hacia atrás
+                while (izquierda >= 0 && DetalleCenso.criterioFecha(arregloOrdenado[izquierda], field).equals(valor)) {
+                    detalles.add(arregloOrdenado[izquierda]);
+                    izquierda--;
+                }
+
+                // Búsqueda lineal hacia adelante
+                int derecha = b.getId() + 1; // Utiliza un campo único para identificar el inicio de la búsqueda lineal hacia adelante
+                while (derecha < arregloOrdenado.length && DetalleCenso.criterioFecha(arregloOrdenado[derecha], field).equals(valor)) {
+                    detalles.add(arregloOrdenado[derecha]);
+                    derecha++;
+                }
+
+                return detalles;  // Se ha encontrado una coincidencia, devolver la lista actualizada
+            }
+        }
+
+        return detalles;  // Si no se encuentra ninguna coincidencia
+    }
     
     public static void mostrarArreglo(int arreglo[]){
        
@@ -247,6 +440,19 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
             System.out.println("Ordenamieto por QuickSort");
             System.out.println(dtc.ordenarQuickSort(dtc.getDetalles(), 0, "fechaDivorcio").imprimir());
             
+            //Busqueda Binaria
+            System.out.println("Busqueda Binaria");
+            System.out.println(dtc.busquedaBinaria( dtc.getDetalles(),"problemas", "motivo").imprimir());
+            System.out.println("Busqueda Binaria Entero");
+            System.out.println(dtc.busquedaBinariaEntero(dtc.getDetalles(),10, "id").imprimir());
+            System.out.println("Busqueda Binaria Fecha");
+            System.out.println(dtc.busquedaBinariaFecha(dtc.getDetalles(),"11/01/2010", "fechaCenso").imprimir());
+            System.out.println("Busqueda Lineal Binaria");
+            System.out.println(dtc.busquedaLinealBinaria(dtc.getDetalles(),"problemas", "motivo").imprimir());
+            System.out.println("Busqueda Lineal Binaria Entero");
+            System.out.println(dtc.busquedaLinealBinariaEntero(dtc.getDetalles(),10, "id").imprimir());
+            System.out.println("Busqueda Lineal Binaria Fecha");
+            System.out.println(dtc.busquedaLinealFecha(dtc.getDetalles(),"11/01/2010", "fechaCenso").imprimir());
             
         } catch (Exception e) {
         }
