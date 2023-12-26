@@ -236,6 +236,46 @@ public class DetalleCenso {
         }
     }
     
+    //Obtener Criterios para las busquedas
+    public static String criterio(DetalleCenso detalle, String field) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        switch (field.toLowerCase()) {
+            case "motivo":
+                return detalle.getMotivo();
+            case "estadocivilanterior":
+                return detalle.getEstadoCivilAnterior();
+            case "estadocivilactual":
+                return detalle.getEstadoCivilActual();
+            case "id_persona":
+                return detalle.getId_persona();
+            default:
+                throw new IllegalArgumentException("Opcion invalida");
+        }
+    }
+    
+    //Para casos con valor Int
+    public static Integer criterioEntero(DetalleCenso detalle, String field) {
+        switch (field.toLowerCase()) {
+            case "id":
+                return detalle.getId();
+         
+            default:
+                throw new IllegalArgumentException("Opcion invalida");
+        }
+    }
+    
+    //Casos para fechas
+    public static Date criterioFecha(DetalleCenso detalle, String field) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        switch (field.toLowerCase()) {
+            case "fechacenso":
+                return sdf.parse(detalle.getFechaCenso());
+            case "fechadivorcio":
+                return sdf.parse(detalle.getFechaDivorcio());
+            default:
+                throw new IllegalArgumentException("Opción inválida");
+        }
+    }
     
      @Override
     public String toString(){
