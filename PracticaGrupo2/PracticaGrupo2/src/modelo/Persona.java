@@ -265,6 +265,42 @@ public class Persona {
         }
     }
     
+    //Criterios para las busquedas
+    public static String criterio(Persona persona, String field) {
+        switch (field.toLowerCase()) {
+            case "nombres":
+                return persona.getNombres();
+            case "apellidos":
+                return persona.getApellidos();
+            case "direccion":
+                return persona.getDireccion();
+            case "rol":
+                return persona.getRol();
+            case "genero":
+                return persona.getGenero();
+            case "correo":
+                return persona.getCorreo();
+            case "cedula":
+                return persona.getCedula();
+            case "telefono":
+                return persona.getTelefono();
+            default:
+                throw new IllegalArgumentException("Opcion invalida");
+        }
+    }
+    
+    //Para casos con valor Int
+    public static Integer criterioEntero(Persona persona, String field) {
+        switch (field.toLowerCase()) {
+            case "id":
+                return persona.getId();
+            case "edad":
+                return persona.getEdad();
+            default:
+                throw new IllegalArgumentException("Opcion invalida");
+        }
+    }
+    
     @Override
     public String toString(){
         return apellidos;
