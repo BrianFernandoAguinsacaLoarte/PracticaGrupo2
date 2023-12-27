@@ -305,14 +305,14 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
             if (valor.contains(text.toLowerCase())) {
                 detalles.add(b);
 
-                // Búsqueda lineal hacia atrás
+             
                 int izquierda = medio - 1;
                 while (izquierda >= 0 && DetalleCenso.criterio(arregloOrdenado[izquierda], field).toLowerCase().contains(text.toLowerCase())) {
                     detalles.add(arregloOrdenado[izquierda]);
                     izquierda--;
                 }
 
-                // Búsqueda lineal hacia adelante
+              
                 int derecha = medio + 1;
                 while (derecha < arregloOrdenado.length && DetalleCenso.criterio(arregloOrdenado[derecha], field).toLowerCase().contains(text.toLowerCase())) {
                     detalles.add(arregloOrdenado[derecha]);
@@ -332,6 +332,7 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
         return detalles;  // Si no se encuentra ninguna coincidencia
     }
     
+    //Busqueda Lineal para Entero
     public LinkedList<DetalleCenso> busquedaLinealBinariaEntero(LinkedList<DetalleCenso> lista, Integer text, String field) throws VacioExcepcion {
         LinkedList<DetalleCenso> detalles = new LinkedList<>(); // Nueva Lista
         DetalleCenso[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort
@@ -347,14 +348,14 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
             if (valor.equals(text)) {
                 detalles.add(b);
 
-                // Búsqueda lineal hacia atrás
+             
                 int izquierda = medio - 1;
                 while (izquierda >= 0 && DetalleCenso.criterioEntero(arregloOrdenado[izquierda], field).equals(text)) {
                     detalles.add(arregloOrdenado[izquierda]);
                     izquierda--;
                 }
 
-                // Búsqueda lineal hacia adelante
+             
                 int derecha = medio + 1;
                 while (derecha < arregloOrdenado.length && DetalleCenso.criterioEntero(arregloOrdenado[derecha], field).equals(text)) {
                     detalles.add(arregloOrdenado[derecha]);
@@ -374,6 +375,7 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
         return detalles;  // Si no se encuentra ninguna coincidencia
     }
     
+    //Busqueda Lineal Fechas
     public LinkedList<DetalleCenso> busquedaLinealFecha(LinkedList<DetalleCenso> lista, String text, String field) throws VacioExcepcion, ParseException {
         LinkedList<DetalleCenso> detalles = new LinkedList<>(); // Nueva Lista
         DetalleCenso[] arregloOrdenado = ordenarQuickSort(lista, 0, field).toArray(); // Ordenando con QuickSort
@@ -385,14 +387,14 @@ public class DetalleController<T> extends DataAccessObject<DetalleCenso> {
             if (text.equals(sdf.format(valor))) {
                 detalles.add(b);
 
-                // Búsqueda lineal hacia atrás
+                
                 int izquierda = b.getId(); // Utiliza un campo único para identificar el inicio de la búsqueda lineal hacia atrás
                 while (izquierda >= 0 && DetalleCenso.criterioFecha(arregloOrdenado[izquierda], field).equals(valor)) {
                     detalles.add(arregloOrdenado[izquierda]);
                     izquierda--;
                 }
 
-                // Búsqueda lineal hacia adelante
+                
                 int derecha = b.getId() + 1; // Utiliza un campo único para identificar el inicio de la búsqueda lineal hacia adelante
                 while (derecha < arregloOrdenado.length && DetalleCenso.criterioFecha(arregloOrdenado[derecha], field).equals(valor)) {
                     detalles.add(arregloOrdenado[derecha]);

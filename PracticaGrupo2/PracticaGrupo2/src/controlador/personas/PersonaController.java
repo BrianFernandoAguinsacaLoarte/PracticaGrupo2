@@ -305,14 +305,14 @@ public class PersonaController extends DataAccessObject<Persona>{
             if (valor.contains(text.toLowerCase())) {
                 personas.add(b);
 
-                // Búsqueda lineal hacia atrás
+               
                 int izquierda = medio - 1;
                 while (izquierda >= 0 && Persona.criterio(arregloOrdenado[izquierda], field).toLowerCase().contains(text.toLowerCase())) {
                     personas.add(arregloOrdenado[izquierda]);
                     izquierda--;
                 }
 
-                // Búsqueda lineal hacia adelante
+               
                 int derecha = medio + 1;
                 while (derecha < arregloOrdenado.length && Persona.criterio(arregloOrdenado[derecha], field).toLowerCase().contains(text.toLowerCase())) {
                     personas.add(arregloOrdenado[derecha]);
@@ -347,14 +347,14 @@ public class PersonaController extends DataAccessObject<Persona>{
             if (valor.equals(text)) {
                 personas.add(b);
 
-                // Búsqueda lineal hacia atrás
+               
                 int izquierda = medio - 1;
                 while (izquierda >= 0 && Persona.criterioEntero(arregloOrdenado[izquierda], field).equals(text)) {
                     personas.add(arregloOrdenado[izquierda]);
                     izquierda--;
                 }
 
-                // Búsqueda lineal hacia adelante
+                
                 int derecha = medio + 1;
                 while (derecha < arregloOrdenado.length && Persona.criterioEntero(arregloOrdenado[derecha], field).equals(text)) {
                     personas.add(arregloOrdenado[derecha]);
